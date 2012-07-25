@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.colorcc.common.security.mapper.SecurityRoleMapper">
+	<select id="selectOne" parameterType="int" resultType="securityRole">
+	 	<![CDATA[
+  			SELECT ID, ROLE, DESCRIPTION 
+  				FROM ROLE
+  				WHERE ID = #{id}
+	 	]]>
+	</select>
+	
+	<select id="getRolesForUser" parameterType="int" resultType="securityRole">
+	 	<![CDATA[
+  			SELECT r.ID, r.ROLE, r.DESCRIPTION FROM USER u
+				LEFT JOIN USER_ROLE ur ON  u.ID = ur.USER_ID
+				LEFT JOIN ROLE r on ur.ROLE_ID = r.ID
+				WHERE u.ID = #{id}
+	 	]]>
+	</select>
+	
+	<select id="getRoleByName" parameterType="string" resultType="securityRole">
+	 	<![CDATA[
+  			SELECT ID, ROLE, DESCRIPTION 
+  				FROM ROLE
+  				WHERE ROLE = #{roleName}
+	 	]]>
+	</select>
+	
+</mapper>

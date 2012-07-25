@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.colorcc.common.security.mapper.SecurityUserRoleMapper">
+	<select id="selectOne" parameterType="int" resultType="securityUserRole">
+	 	<![CDATA[
+  			SELECT ID, USER_ID as userId, ROLE_ID as roleId
+  				FROM USER_ROLE
+  				WHERE ID = #{id}
+	 	]]>
+	</select>
+	
+	<insert id="insertOne" parameterType="securityUserRole" useGeneratedKeys="true" keyProperty="ID">
+		<![CDATA[
+			INSERT INTO USER_ROLE (USER_ID, ROLE_ID )
+			VALUES (#{userId}, #{roleId})
+		]]>
+	</insert>
+
+	 <update id="updateOne" parameterType="securityUserRole">
+		<![CDATA[
+			UPDATE USER_ROLE
+			SET USER_ID=#{userId}, ROLE_ID=#{roleId}
+			WHERE ID = #{id}
+		]]>
+	</update>
+
+	<delete id="deleteOne" parameterType="int">
+		<![CDATA[
+			DELETE FROM USER_ROLE WHERE ID = #{id}
+		]]>
+	</delete>	
+	
+	<delete id="deleteRolesByUserID" parameterType="int">
+		<![CDATA[
+			DELETE FROM USER_ROLE WHERE USER_ID = #{userId}
+		]]>
+	</delete>
+	
+</mapper>
